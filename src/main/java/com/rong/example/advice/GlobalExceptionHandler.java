@@ -1,7 +1,7 @@
 package com.rong.example.advice;
 
 import com.rong.example.constant.IactivityConstants;
-import com.rong.example.expection.BusinessRuntimeException;
+import com.rong.example.expection.ServiceException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,15 +44,13 @@ public class GlobalExceptionHandler{
 	 * @param e
 	 * @return
 	 */
-	@ExceptionHandler(value = { BusinessRuntimeException.class })
+	@ExceptionHandler(value = { ServiceException.class })
 	@ResponseBody
-	public String handleBusinessException(BusinessRuntimeException e) {
+	public String handleBusinessException(ServiceException e) {
 		log.error("异常：{}", e);
-		if(e.getCauseKey()!=0){
-			if(e.getPatternStr()!=null){
-				response.addHeader("err-pat",base64Encode(e.getPatternStr()));
-			}
-			response.addHeader("err-code",e.getCauseKey()+"");
+		if(e.getCode()!="0"){
+			response.addHeader("err-pat",base64Encode(e.getMessage()));
+			response.addHeader("err-code",e.getCode()+"");
 
 		}else{
 			//"24"代表个人中心组件
