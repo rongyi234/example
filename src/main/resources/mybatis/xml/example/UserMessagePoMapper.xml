@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rong.example.mapper.UserMessagePoMapper" >
+  <resultMap id="BaseResultMap" type="com.rong.example.mapper.pojo.UserMessagePo" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="info" property="info" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="ref_id" property="refId" jdbcType="VARCHAR" />
+    <result column="REF_INFO" property="refInfo" jdbcType="LONGVARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="account_id" property="accountId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="URL" property="url" jdbcType="CHAR" />
+    <result column="message_type" property="messageType" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="REF_TYPE" property="refType" jdbcType="INTEGER" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="ui_type" property="uiType" jdbcType="INTEGER" />
+    <result column="voucher_type" property="voucherType" jdbcType="INTEGER" />
+    <result column="voucher_value" property="voucherValue" jdbcType="VARCHAR" />
+    <result column="voucher_num" property="voucherNum" jdbcType="INTEGER" />
+    <result column="gift_id" property="giftId" jdbcType="VARCHAR" />
+    <result column="gift_type" property="giftType" jdbcType="INTEGER" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.rong.example.mapper.pojo.UserMessagePo" >
+    insert into t_user_message (id, info, type, 
+      ref_id, status, account_id, 
+      create_time, URL, message_type, 
+      title, REF_TYPE, CITY, 
+      ui_type, voucher_type, voucher_value, 
+      voucher_num, gift_id, gift_type, 
+      REF_INFO)
+    values (#{id,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{refId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{accountId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{url,jdbcType=CHAR}, #{messageType,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{refType,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, 
+      #{uiType,jdbcType=INTEGER}, #{voucherType,jdbcType=INTEGER}, #{voucherValue,jdbcType=VARCHAR}, 
+      #{voucherNum,jdbcType=INTEGER}, #{giftId,jdbcType=VARCHAR}, #{giftType,jdbcType=INTEGER}, 
+      #{refInfo,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <select id="selectMsgInfo" parameterType="com.rong.example.mapper.pojo.UserMessagePo" resultMap="BaseResultMap">
+
+    select * from t_user_message
+    <trim prefix="where">
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </select>
+
+</mapper>

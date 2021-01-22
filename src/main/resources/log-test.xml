@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+	<conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+	<conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+	<property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+	<appender name="alilog" class="cn.runsa.boot.extension.log.LoghubAppender">
+    	<logStore>service</logStore>
+    	<topic>iactivity</topic>
+
+    	<!-- 单个producer实例能缓存的日志大小上限: 10M -->
+    	<totalSizeInBytes>1048576</totalSizeInBytes>
+    	<!-- 如果 producer 可用空间不足，调用者在 send 方法上的最大阻塞时间:3s -->
+    	<maxBlockMs>3000</maxBlockMs>
+    	<!-- 执行日志发送任务的线程池大小 -->
+    	<ioThreadCount>2</ioThreadCount>
+    	<!-- 当一个 ProducerBatch 中缓存的日志大小大于等于 batchSizeThresholdInBytes 时，该 batch 将被发送，64KB -->
+    	<batchSizeThresholdInBytes>65536</batchSizeThresholdInBytes>
+    	<!-- 当一个 ProducerBatch 中缓存的日志条数大于等于 batchCountThreshold 时，该 batch 将被发送: 200 -->
+    	<batchCountThreshold>100</batchCountThreshold>
+    	<!-- 一个 ProducerBatch 从创建到可发送的逗留时间，默认为 2 秒，最小可设置成 100 毫秒 -->
+    	<lingerMs>2000</lingerMs>
+    	<!-- 如果某个 ProducerBatch 首次发送失败，能够对其重试的次数，默认为 10 次 -->
+    	<retries>3</retries>
+    	<!-- 该参数越大能让您追溯更多的信息，但同时也会消耗更多的内存 -->
+    	<maxReservedAttempts>5</maxReservedAttempts>
+    	<!-- 首次重试的退避时间，默认为 100 毫秒 -->
+    	<baseRetryBackoffMs>500</baseRetryBackoffMs>
+    	<!-- 重试的最大退避时间，默认为 50 秒 -->
+    	<maxRetryBackoffMs>30</maxRetryBackoffMs>
+		<encoder>
+			<pattern>%d %-5level [%thread] %logger{0}: %msg </pattern>
+		</encoder>
+	</appender>
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	<root level="INFO">
+		<appender-ref ref="alilog" />
+		<appender-ref ref="console" />
+	</root>
+
+	<logger name="cn.runsa" level="debug" />
+	<logger name="io.ebean" level="DEBUG" />
+	<logger name="io.ebeaninternal" level="DEBUG" />
+	<logger name="org.apache.http" level="WARN"/>
+	<logger name="org.mybatis" level="info"/>
+	<logger name="org.springframework.jdbc" level="info"/>
+	<logger name="org.springframework.web.servlet.mvc.method.annotation" level="info"/>
+	<logger name="biz-log" additivity="true"/>
+	<logger name="mq" additivity="false"/>
+	<logger name="biz-event" additivity="false"/>
+	<logger name="mq-dequeue" additivity="true"/>
+
+	<logger name="com.aliyun.openservices" level="WARN" />
+	<logger name="org.apache" level="WARN" />
+	<logger name="org.springframework" level="WARN" />
+</configuration>

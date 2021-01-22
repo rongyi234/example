@@ -1,0 +1,27 @@
+# .gitignore for maven 
+target
+bin
+
+# .gitignore for IDE
+.project
+.classpath
+.settings
+.tern-project
+.metadata
+*/.idea/*
+*.iml
+
+#.gitignore for java
+*.class
+
+# .gitignore for log
+*.log
+
+# .gitignore for project package files
+*.jar
+*.war
+*.ear
+
+# .gitignore for plugin release file
+*.zip
+.idea/

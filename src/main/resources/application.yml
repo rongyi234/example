@@ -1,0 +1,38 @@
+mybatis:
+  configuration:
+    lazyLoadingEnabled: true
+  type-aliases-package: com.rong.example.mapper
+  mapperLocations:
+  - classpath*:mybatis/xml/**/*Mapper.xml
+
+
+server:
+  port: 8080
+  tomcat:
+    accesslog:
+      enabled: false
+
+spring:
+  aop:
+    proxy-target-class: true
+  application:
+    name: example
+  datasource:
+    username: cams_charge
+    password: mz8j0jBbMq
+    url: jdbc:mysql://rm-bp1dgp08njl84sbdrqo.mysql.rds.aliyuncs.com:3306/cams_charge?useUnicode=true&characterEncoding=UTF-8
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+
+ 
+logging:
+  config: classpath:log-${spring.profiles.active}.xml
+    
+
+
+
+
