@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  * 限流工具类 (不同业务场景，可以建立自己专用的限流工具类)
  *
  */
-public class RateLimiterUtils {
+public class RateLimitUtils {
 
     //每秒只发出80个令牌
     private static RateLimiter rateLimiter = RateLimiter.create(80.0);
