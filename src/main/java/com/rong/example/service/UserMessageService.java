@@ -3,7 +3,10 @@ package com.rong.example.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import com.rong.example.bean.bo.UserMessage;
+import com.rong.example.cache.RedisKeyConstant;
+import com.rong.example.cache.RedisUtils;
 import com.rong.example.constant.UITypeEnum;
 import com.rong.example.mapper.UserMessagePoMapper;
 import com.rong.example.mapper.pojo.UserMessagePo;
@@ -11,7 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -26,9 +31,26 @@ public class UserMessageService {
 	@Autowired
 	private UserMessagePoMapper userMessagePoMapper;
 
+	@Autowired
+	private RedisUtils redisUtils;
 
 
 	public  List<UserMessage> selectMsgInfo(String userId){
+
+		//userId不为空时，优先查询缓存
+		if(StrUtil.isNotEmpty(userId)){
+			String key = RedisKeyConstant.CACHE_TYPE_USER+RedisKeyConstant.UNDERLINE+userId;
+
+			UserMessage userMessage=redisUtils.getObject(key,UserMessage.class);
+			if(userMessage != null){
+				log.info("查询redis: userMessage="+userMessage);
+				List<UserMessage> list= new ArrayList<>();
+				list.add(userMessage);
+				return list;
+			}
+		}
+
+
 		UserMessagePo reqPo=new UserMessagePo();
 		reqPo.setAccountId(userId);
 		List<UserMessagePo> polist=userMessagePoMapper.selectMsgInfo( reqPo);
@@ -36,6 +58,15 @@ public class UserMessageService {
 		if(CollUtil.isEmpty(polist)){
 			log.info("用户消息不存在，userId="+userId);
 			return null;
+		}
+
+		//存储redis
+		if(StrUtil.isNotEmpty(userId)){
+			String key = RedisKeyConstant.CACHE_TYPE_USER+RedisKeyConstant.UNDERLINE+userId;
+			UserMessage userMessage=new UserMessage();
+			BeanUtil.copyProperties(polist.get(0),userMessage);
+			log.info("存储redis: userMessage="+userMessage);
+			redisUtils.setObject(key,userMessage,10, TimeUnit.SECONDS);
 		}
 
 		//封装转换

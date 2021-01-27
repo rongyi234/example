@@ -27,6 +27,12 @@ spring:
     allow-bean-definition-overriding: true
   profiles:
     active: dev
+  redis:
+    host: r-bp1fq7ky86jpzmz88kpd.redis.rds.aliyuncs.com
+    password: 5W4k3j3XtT
+    port: 6379
+    database: 9
+    timeout: 5000
 
  
 logging:
