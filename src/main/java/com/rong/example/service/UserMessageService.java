@@ -7,7 +7,10 @@ import cn.hutool.core.util.StrUtil;
 import com.rong.example.bean.bo.UserMessage;
 import com.rong.example.cache.RedisKeyConstant;
 import com.rong.example.cache.RedisUtils;
+import com.rong.example.constant.ErrorCodeEnum;
 import com.rong.example.constant.UITypeEnum;
+import com.rong.example.expection.ServiceException;
+import com.rong.example.filter.PageLimitHolderFilter;
 import com.rong.example.mapper.UserMessagePoMapper;
 import com.rong.example.mapper.pojo.UserMessagePo;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +38,9 @@ public class UserMessageService {
 	private RedisUtils redisUtils;
 
 
-	public  List<UserMessage> selectMsgInfo(String userId){
+	public  List<UserMessage> selectMsgInfo(String userId) throws Exception{
+
+
 
 		//userId不为空时，优先查询缓存
 		if(StrUtil.isNotEmpty(userId)){
@@ -53,7 +58,8 @@ public class UserMessageService {
 
 		UserMessagePo reqPo=new UserMessagePo();
 		reqPo.setAccountId(userId);
-		List<UserMessagePo> polist=userMessagePoMapper.selectMsgInfo( reqPo);
+		log.info("获取分页参数："+PageLimitHolderFilter.getContext());
+		List<UserMessagePo> polist=userMessagePoMapper.selectMsgInfo( reqPo, PageLimitHolderFilter.getContext());
 
 		if(CollUtil.isEmpty(polist)){
 			log.info("用户消息不存在，userId="+userId);
@@ -79,6 +85,12 @@ public class UserMessageService {
 			return userMessage;
 		}).collect(Collectors.toList());
 
+		//分页查询: totalCount
+		if(PageLimitHolderFilter.getContext() != null){
+			PageLimitHolderFilter.getContext().setTotalCount(userMessagePoMapper.selectTotalCount(reqPo));
+		}
+
 		return msgList;
+
 	}
 }

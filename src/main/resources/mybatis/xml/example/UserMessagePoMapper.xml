@@ -40,12 +40,24 @@
       #{refInfo,jdbcType=LONGVARCHAR})
   </insert>
 
-  <select id="selectMsgInfo" parameterType="com.rong.example.mapper.pojo.UserMessagePo" resultMap="BaseResultMap">
-
+  <select id="selectMsgInfo"  resultMap="BaseResultMap">
     select * from t_user_message
     <trim prefix="where">
-      <if test="accountId != null" >
-        account_id = #{accountId,jdbcType=VARCHAR}
+      <if test="po.accountId != null" >
+        account_id = #{po.accountId,jdbcType=VARCHAR}
+      </if>
+    </trim>
+    <if test="page.startIndex != null" >
+      order by create_time desc
+      limit #{page.startIndex,jdbcType=INTEGER},#{page.pageSize,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="selectTotalCount"  resultType="java.lang.Integer">
+    select count(*) from t_user_message
+    <trim prefix="where">
+      <if test="po.accountId != null" >
+        account_id = #{po.accountId,jdbcType=VARCHAR}
       </if>
     </trim>
   </select>

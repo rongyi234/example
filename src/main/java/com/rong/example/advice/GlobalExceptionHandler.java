@@ -1,6 +1,7 @@
 package com.rong.example.advice;
 
-import com.rong.example.constant.IactivityConstants;
+import com.rong.example.constant.ErrorCodeEnum;
+import com.rong.example.constant.ExampleConstants;
 import com.rong.example.expection.ServiceException;
 
 import org.slf4j.Logger;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Base64;
 
 @ControllerAdvice
 public class GlobalExceptionHandler{
@@ -24,42 +24,27 @@ public class GlobalExceptionHandler{
 
 
 	/**
-	 * 必传参数校验异常处理
-	 * @param e
-	 * @return
+	 * 注解@Valid 必传参数校验异常处理
+	 *
 	 */
 	@ExceptionHandler(value = { MethodArgumentNotValidException.class })
 	@ResponseBody
 	public String handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-		log.error("异常：{}", e);
-		response.addHeader("err-code",String.valueOf(IactivityConstants.REQUEST_ERROR_CODE));
-
-		//网关判断http的状态值大于400，才会认为业务处理异常
-		response.setStatus(406);
+		log.error("异常："+ e.getMessage());
+		response.addHeader(ExampleConstants.HTTP_FLAG_CODE,String.valueOf(ErrorCodeEnum.SYSTEM_ERROR.getCode()));
 		return e.getMessage();
 	}
 
 	/**
 	 * 业务异常处理
-	 * @param e
-	 * @return
+	 *
 	 */
 	@ExceptionHandler(value = { ServiceException.class })
 	@ResponseBody
-	public String handleBusinessException(ServiceException e) {
-		log.error("异常：{}", e);
-		if(e.getCode()!="0"){
-			response.addHeader("err-pat",base64Encode(e.getMessage()));
-			response.addHeader("err-code",e.getCode()+"");
+	public void handleBusinessException(ServiceException e) {
+		log.error("异常："+ ErrorCodeEnum.getMsgByCode(e.getCode()));
+		response.addHeader(ExampleConstants.HTTP_FLAG_CODE,String.valueOf(e.getCode()));
 
-		}else{
-			//"24"代表个人中心组件
-			response.addHeader("err-code",String.valueOf(IactivityConstants.SYSTEM_ERROR_CODE));
-		}
-
-		//网关判断http的状态值大于400，才会认为业务处理异常
-		response.setStatus(406);
-		return e.getMessage();
 	}
 
 
@@ -73,23 +58,13 @@ public class GlobalExceptionHandler{
 	@ExceptionHandler(value = { Exception.class })
 	@ResponseBody
 	public String handleException(Exception e,HttpServletResponse response) {
-		log.error("异常：{}", e);
-		response.addHeader("err-code",String.valueOf(IactivityConstants.SYSTEM_ERROR_CODE));
+		log.error("异常："+ e.getMessage());
+		response.addHeader(ExampleConstants.HTTP_FLAG_CODE,String.valueOf(ErrorCodeEnum.SYSTEM_ERROR.getCode()));
 
 		//网关判断http的状态值大于400，才会认为业务处理异常
-		response.setStatus(406);
+		//response.setStatus(406);
 		return e.getMessage();
 	}
 
-	/**
-	 * 64位加密
-	 * @param message
-	 * @return
-	 */
-	private String base64Encode(String message){
-		byte[] bytes = message.getBytes();
-		//Base64 加密
-		return Base64.getEncoder().encodeToString(bytes);
-	}
 
 }

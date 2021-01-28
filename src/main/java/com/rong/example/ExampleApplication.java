@@ -1,17 +1,22 @@
 package com.rong.example;
 
+import com.rong.example.filter.PageLimitHolderFilter;
 import com.rong.example.support.QualifiedBeanNameGenerator;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.boot.Banner;
+
+import java.util.Arrays;
 
 
 @SpringBootApplication
@@ -29,6 +34,15 @@ public class ExampleApplication {
 		app.setBannerMode(Banner.Mode.OFF);
 		app.run(args);
 		System.out.println("\n-------------------example project start successfully------------------\n");
+	}
+
+	@Bean
+	public FilterRegistrationBean pageLimitFilter() {
+		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+		registrationBean.setFilter(new PageLimitHolderFilter());
+		registrationBean.setUrlPatterns(Arrays.asList(new String[]{"/*"}));
+		registrationBean.setOrder(3);
+		return registrationBean;
 	}
 
 }

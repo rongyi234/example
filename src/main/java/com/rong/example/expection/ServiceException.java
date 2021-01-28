@@ -2,7 +2,7 @@ package com.rong.example.expection;
 
 
 /**
- *
+ * 通用业务处理异常
  */
 public class ServiceException extends RuntimeException{
 
@@ -19,7 +19,8 @@ public class ServiceException extends RuntimeException{
 		return this.data;
 	}
 
-	public ServiceException() {
+	public ServiceException(Integer code) {
+		this.code=code.toString();
 	}
 
 	public ServiceException(Throwable e) {

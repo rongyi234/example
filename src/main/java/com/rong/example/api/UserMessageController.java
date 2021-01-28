@@ -26,13 +26,14 @@ public class UserMessageController {
 
 
     @RequestMapping(value = "/select", method = RequestMethod.POST)
-    public List<UserMessage> selectUserMessages(@RequestBody SelectUserMessagesReq req) {
+    public List<UserMessage> selectUserMessages(@RequestBody SelectUserMessagesReq req) throws Exception {
         List<UserMessage> msgList = userMessageService.selectMsgInfo(req.getUserId());
         return msgList;
     }
 
     @RequestMapping(value = "/selectByUserId", method = RequestMethod.POST)
-    public List<UserMessage> selectUserMessagesByUserId(@Validated @RequestBody SelectUserMessagesReq req) {
+    public List<UserMessage> selectUserMessagesByUserId(@Validated @RequestBody SelectUserMessagesReq req)
+    throws Exception{
         List<UserMessage> msgList = userMessageService.selectMsgInfo(req.getUserId());
         return msgList;
     }
