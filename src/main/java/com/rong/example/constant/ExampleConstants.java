@@ -30,11 +30,14 @@ public interface ExampleConstants {
 
 
     /**
-     * HTTP响应code
+     * HTTP响应 错误码
      */
     String HTTP_FLAG_CODE="err-code";
 
-
+    /**
+     * HTTP响应 错误描述
+     */
+    String HTTP_FLAG_MSG="err-msg";
 
 
 }

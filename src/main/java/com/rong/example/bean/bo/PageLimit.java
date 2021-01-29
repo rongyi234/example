@@ -2,13 +2,8 @@ package com.rong.example.bean.bo;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
-import lombok.ToString;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 @Data
 public class PageLimit {
     private static final Integer DEFAULTPAGESIZE= 10;

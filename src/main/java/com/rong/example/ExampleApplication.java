@@ -20,7 +20,7 @@ import java.util.Arrays;
 
 
 @SpringBootApplication
-@ServletComponentScan
+//@ServletComponentScan
 @ComponentScan(basePackages = "com.rong.example", nameGenerator = QualifiedBeanNameGenerator.class)
 @MapperScan(basePackages = { "com.rong.example.mapper"}, nameGenerator = QualifiedBeanNameGenerator.class)
 @EnableAspectJAutoProxy(exposeProxy = true)
@@ -44,5 +44,8 @@ public class ExampleApplication {
 		registrationBean.setOrder(3);
 		return registrationBean;
 	}
+
+
+
 
 }

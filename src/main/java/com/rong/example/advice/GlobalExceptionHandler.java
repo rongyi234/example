@@ -7,6 +7,8 @@ import com.rong.example.expection.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,10 +31,14 @@ public class GlobalExceptionHandler{
 	 */
 	@ExceptionHandler(value = { MethodArgumentNotValidException.class })
 	@ResponseBody
-	public String handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-		log.error("异常："+ e.getMessage());
-		response.addHeader(ExampleConstants.HTTP_FLAG_CODE,String.valueOf(ErrorCodeEnum.SYSTEM_ERROR.getCode()));
-		return e.getMessage();
+	public void handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+		StringBuilder sb=new StringBuilder();
+		for (ObjectError error : e.getBindingResult().getAllErrors()) {
+			sb.append("[").append(error.getDefaultMessage()).append("]");
+		}
+		log.error("异常 ："+ sb.toString());
+		response.addHeader(ExampleConstants.HTTP_FLAG_CODE,ErrorCodeEnum.REQUEST_PARAMS_ERROR.getCode().toString());
+		response.addHeader(ExampleConstants.HTTP_FLAG_MSG,sb.toString());
 	}
 
 	/**
@@ -42,7 +48,7 @@ public class GlobalExceptionHandler{
 	@ExceptionHandler(value = { ServiceException.class })
 	@ResponseBody
 	public void handleBusinessException(ServiceException e) {
-		log.error("异常："+ ErrorCodeEnum.getMsgByCode(e.getCode()));
+		log.error("异常 ："+ ErrorCodeEnum.getMsgByCode(e.getCode()));
 		response.addHeader(ExampleConstants.HTTP_FLAG_CODE,String.valueOf(e.getCode()));
 
 	}
@@ -57,13 +63,11 @@ public class GlobalExceptionHandler{
 	 */
 	@ExceptionHandler(value = { Exception.class })
 	@ResponseBody
-	public String handleException(Exception e,HttpServletResponse response) {
-		log.error("异常："+ e.getMessage());
+	public void handleException(Exception e) {
+		log.error("异常 ："+ e.getMessage());
 		response.addHeader(ExampleConstants.HTTP_FLAG_CODE,String.valueOf(ErrorCodeEnum.SYSTEM_ERROR.getCode()));
 
-		//网关判断http的状态值大于400，才会认为业务处理异常
 		//response.setStatus(406);
-		return e.getMessage();
 	}
 
 

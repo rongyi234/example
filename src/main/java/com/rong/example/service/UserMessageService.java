@@ -8,6 +8,7 @@ import com.rong.example.bean.bo.UserMessage;
 import com.rong.example.cache.RedisKeyConstant;
 import com.rong.example.cache.RedisUtils;
 import com.rong.example.constant.ErrorCodeEnum;
+import com.rong.example.constant.ExampleConstants;
 import com.rong.example.constant.UITypeEnum;
 import com.rong.example.expection.ServiceException;
 import com.rong.example.filter.PageLimitHolderFilter;
@@ -39,8 +40,6 @@ public class UserMessageService {
 
 
 	public  List<UserMessage> selectMsgInfo(String userId) throws Exception{
-
-
 
 		//userId不为空时，优先查询缓存
 		if(StrUtil.isNotEmpty(userId)){
@@ -91,6 +90,5 @@ public class UserMessageService {
 		}
 
 		return msgList;
-
 	}
 }

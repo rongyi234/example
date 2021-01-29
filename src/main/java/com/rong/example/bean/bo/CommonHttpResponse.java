@@ -4,12 +4,14 @@ import cn.hutool.core.util.StrUtil;
 import com.rong.example.constant.ErrorCodeEnum;
 import com.rong.example.constant.ExampleConstants;
 import com.rong.example.filter.PageLimitHolderFilter;
+import lombok.ToString;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 
+@ToString
 public class CommonHttpResponse implements Serializable {
 
     private static final long serialVersionUID = -115509026625589704L;
@@ -88,11 +90,11 @@ public class CommonHttpResponse implements Serializable {
 
         HttpServletResponse httpServletResponse = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         String code=httpServletResponse.getHeader(ExampleConstants.HTTP_FLAG_CODE);
-
+        String msg=httpServletResponse.getHeader(ExampleConstants.HTTP_FLAG_MSG);
         //异常
         if(StrUtil.isNotEmpty(code)){
             result.setCode(code);
-            result.setText(ErrorCodeEnum.getMsgByCode(code));
+            result.setText(ErrorCodeEnum.getMsgByCode(code)+(msg==null?"":msg ));
             return result;
         }
 
