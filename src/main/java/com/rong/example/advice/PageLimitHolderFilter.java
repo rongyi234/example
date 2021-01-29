@@ -1,4 +1,4 @@
-package com.rong.example.filter;
+package com.rong.example.advice;
 
 import com.rong.example.bean.bo.PageLimit;
 
@@ -19,13 +19,13 @@ public class PageLimitHolderFilter implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        threadLocal.set(new PageLimit((HttpServletRequest)request));
+        threadLocal.set(new PageLimit((HttpServletRequest) request));
         chain.doFilter(request, response);
 
     }
 
     public static PageLimit getContext() {
-        return (PageLimit)threadLocal.get();
+        return (PageLimit) threadLocal.get();
     }
 
     public static void setContext(PageLimit pageLimit) {

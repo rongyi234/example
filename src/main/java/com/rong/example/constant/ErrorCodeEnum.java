@@ -8,8 +8,9 @@ import cn.hutool.core.util.StrUtil;
 public enum ErrorCodeEnum {
     SYSTEM_ERROR(525000, "系统内部异常"),
 
-    REQUEST_PARAMS_ERROR(525001,"必传参数校验异常");
+    REQUEST_PARAMS_ERROR(525001,"必传参数校验异常"),
 
+    APP_VERSION_ERROR(525002,"app版本过低");
 
     /**
      * 根据code获取msg

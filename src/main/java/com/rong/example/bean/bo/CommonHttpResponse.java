@@ -1,9 +1,9 @@
 package com.rong.example.bean.bo;
 
 import cn.hutool.core.util.StrUtil;
+import com.rong.example.advice.PageLimitHolderFilter;
 import com.rong.example.constant.ErrorCodeEnum;
 import com.rong.example.constant.ExampleConstants;
-import com.rong.example.filter.PageLimitHolderFilter;
 import lombok.ToString;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

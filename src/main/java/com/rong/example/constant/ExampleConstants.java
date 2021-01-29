@@ -39,5 +39,10 @@ public interface ExampleConstants {
      */
     String HTTP_FLAG_MSG="err-msg";
 
+    /**
+     * 最低app版本
+     */
+    String APP_VERSION = "1.5.0";
+
 
 }

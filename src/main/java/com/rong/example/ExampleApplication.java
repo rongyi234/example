@@ -1,6 +1,6 @@
 package com.rong.example;
 
-import com.rong.example.filter.PageLimitHolderFilter;
+import com.rong.example.advice.PageLimitHolderFilter;
 import com.rong.example.support.QualifiedBeanNameGenerator;
 
 import org.mybatis.spring.annotation.MapperScan;
@@ -20,7 +20,6 @@ import java.util.Arrays;
 
 
 @SpringBootApplication
-//@ServletComponentScan
 @ComponentScan(basePackages = "com.rong.example", nameGenerator = QualifiedBeanNameGenerator.class)
 @MapperScan(basePackages = { "com.rong.example.mapper"}, nameGenerator = QualifiedBeanNameGenerator.class)
 @EnableAspectJAutoProxy(exposeProxy = true)
@@ -36,14 +35,7 @@ public class ExampleApplication {
 		System.out.println("\n-------------------example project start successfully------------------\n");
 	}
 
-	@Bean
-	public FilterRegistrationBean pageLimitFilter() {
-		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-		registrationBean.setFilter(new PageLimitHolderFilter());
-		registrationBean.setUrlPatterns(Arrays.asList(new String[]{"/*"}));
-		registrationBean.setOrder(3);
-		return registrationBean;
-	}
+
 
 
 

@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * 统一处理controller层返回的数据格式
  */
-//@EnableWebMvc
 @Configuration
 @RestControllerAdvice(basePackages = {"com.rong.example.api","com.rong.example.advice"})
 @Slf4j

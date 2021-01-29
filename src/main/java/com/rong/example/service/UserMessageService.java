@@ -4,14 +4,11 @@ package com.rong.example.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import com.rong.example.advice.PageLimitHolderFilter;
 import com.rong.example.bean.bo.UserMessage;
 import com.rong.example.cache.RedisKeyConstant;
 import com.rong.example.cache.RedisUtils;
-import com.rong.example.constant.ErrorCodeEnum;
-import com.rong.example.constant.ExampleConstants;
 import com.rong.example.constant.UITypeEnum;
-import com.rong.example.expection.ServiceException;
-import com.rong.example.filter.PageLimitHolderFilter;
 import com.rong.example.mapper.UserMessagePoMapper;
 import com.rong.example.mapper.pojo.UserMessagePo;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +54,7 @@ public class UserMessageService {
 
 		UserMessagePo reqPo=new UserMessagePo();
 		reqPo.setAccountId(userId);
-		log.info("获取分页参数："+PageLimitHolderFilter.getContext());
+		log.info("获取分页参数："+ PageLimitHolderFilter.getContext());
 		List<UserMessagePo> polist=userMessagePoMapper.selectMsgInfo( reqPo, PageLimitHolderFilter.getContext());
 
 		if(CollUtil.isEmpty(polist)){

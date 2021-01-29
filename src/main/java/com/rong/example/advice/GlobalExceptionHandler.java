@@ -13,10 +13,11 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletResponse;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler{
 
 	private final static Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
