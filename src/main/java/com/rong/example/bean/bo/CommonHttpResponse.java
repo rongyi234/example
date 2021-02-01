@@ -85,10 +85,10 @@ public class CommonHttpResponse implements Serializable {
 
     public static CommonHttpResponse deserialize(Object body) {
 
+        HttpServletResponse httpServletResponse = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         CommonHttpResponse result = new CommonHttpResponse();
         result.setData(body);
 
-        HttpServletResponse httpServletResponse = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         String code=httpServletResponse.getHeader(ExampleConstants.HTTP_FLAG_CODE);
         String msg=httpServletResponse.getHeader(ExampleConstants.HTTP_FLAG_MSG);
         //异常

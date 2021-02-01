@@ -40,6 +40,11 @@ public interface ExampleConstants {
     String HTTP_FLAG_MSG="err-msg";
 
     /**
+     * HTTP响应 错误描述
+     */
+    String HTTP_FLAG_ORIGIN="keep-origin";
+
+    /**
      * 最低app版本
      */
     String APP_VERSION = "1.5.0";

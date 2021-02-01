@@ -38,7 +38,14 @@ spring:
 logging:
   config: classpath:log-${spring.profiles.active}.xml
     
-
+feign:
+  service:
+    sale:
+      name: sale
+      url: 47.111.208.192:8006
+    crm:
+      name: crm
+      url: http://xxx.com
 
 
 

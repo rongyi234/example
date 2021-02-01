@@ -36,6 +36,7 @@ public class UserInfoInterceptor extends HandlerInterceptorAdapter {
         SessionContext context = new SessionContext();
         context.setAppVersion(appVersion);
         SessionContextHolder.setContext(context);
+        log.info("设置上下文："+JSON.toJSONString(context));
         return true;
     }
 }
