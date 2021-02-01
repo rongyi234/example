@@ -49,7 +49,7 @@ public class GlobalExceptionHandler{
 	@ExceptionHandler(value = { ServiceException.class })
 	@ResponseBody
 	public void handleBusinessException(ServiceException e) {
-		log.error("异常 ："+ ErrorCodeEnum.getMsgByCode(e.getCode()));
+		log.error("业务异常 ："+ ErrorCodeEnum.getMsgByCode(e.getCode()));
 		response.addHeader(ExampleConstants.HTTP_FLAG_CODE,String.valueOf(e.getCode()));
 
 	}
@@ -65,7 +65,7 @@ public class GlobalExceptionHandler{
 	@ExceptionHandler(value = { Exception.class })
 	@ResponseBody
 	public void handleException(Exception e) {
-		log.error("异常 ："+ e.getMessage());
+		log.error("系统错误 ："+ e.getMessage());
 		response.addHeader(ExampleConstants.HTTP_FLAG_CODE,String.valueOf(ErrorCodeEnum.SYSTEM_ERROR.getCode()));
 
 		//response.setStatus(406);

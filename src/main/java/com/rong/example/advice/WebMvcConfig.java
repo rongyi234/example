@@ -27,7 +27,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(userInfoInterceptor)
                 //配置拦截路径，其中/**表示当前目录以及所有子目录（递归），/*表示当前目录，不包括子目录。
                 //配置"/userMsg"，就只能拦截 ..../userMsg 这种
-                .addPathPatterns("/userMsg/**","/sale/**")
+                .addPathPatterns("/userMsg/**","/sale/**","/test/**")
                 .excludePathPatterns("/userMsg/select","/userMsg/select.do");
     }
 
