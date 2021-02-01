@@ -7,7 +7,6 @@ import com.rong.example.constant.ErrorCodeEnum;
 import com.rong.example.constant.ExampleConstants;
 import com.rong.example.expection.ServiceException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 

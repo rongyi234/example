@@ -1,10 +1,6 @@
 package com.rong.example.builder;
 
-import cn.hutool.core.util.StrUtil;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
 
-import java.io.Serializable;
 
 /**
  * builder模式使用样例

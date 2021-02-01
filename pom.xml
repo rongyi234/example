@@ -107,26 +107,13 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.7</version>
 		</dependency>
-		<!-- XStream -->
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-		</dependency>
 		 <dependency>
 			 <groupId>org.apache.httpcomponents</groupId>
 			 <artifactId>httpasyncclient</artifactId>
 			 <optional>true</optional>
 		 </dependency>
-		 <dependency>
-			 <groupId>org.apache.httpcomponents</groupId>
-			 <artifactId>httpmime</artifactId>
-		 </dependency>
-		
+
 		<!-- commons -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
