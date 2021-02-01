@@ -45,11 +45,25 @@ public class ResultResponseAdvice implements ResponseBodyAdvice<Object> {
 
         //消息头标志位存在，原样返回
         if(StrUtil.isNotEmpty(httpServletResponse.getHeader(ExampleConstants.HTTP_FLAG_ORIGIN))){
-            return body;
+            return jsonSerialize( body, body);
         }
 
         CommonHttpResponse commonHttpResponse= CommonHttpResponse.deserialize(body);
 
-        return commonHttpResponse;
+        return jsonSerialize( body, commonHttpResponse);
     }
+
+    /**
+     * 判断是否需要主动json序列化
+     */
+    private Object jsonSerialize(Object body, Object outPut){
+        //处理返回值是String的情况，系统不会再进行json序列化，需要手动，否则报错：xxx cannot be cast to java.lang.String
+        if (body instanceof String) {
+            return JSON.toJSONString(outPut);
+        }
+
+        //系统自动进行json序列化
+        return outPut;
+    }
+
 }
