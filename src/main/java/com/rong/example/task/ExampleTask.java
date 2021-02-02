@@ -25,7 +25,7 @@ public class ExampleTask {
      * 样例
      */
     @Async("executor1")
-    @Scheduled(cron = "${task.ExampleTask}")
+//    @Scheduled(cron = "${task.ExampleTask}")
     public void auditTask() {
         if (redisClient.getLock("task_exampleTask", 500, TimeUnit.MILLISECONDS)) {
             log.info("定时任务启动：ExampleTask");

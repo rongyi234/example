@@ -45,9 +45,8 @@
 		<appender-ref ref="console" />
 	</root>
 
-	<logger name="cn.runsa" level="debug" />
-	<logger name="io.ebean" level="DEBUG" />
-	<logger name="io.ebeaninternal" level="DEBUG" />
+	<logger name="com.rong.example" level="debug" />
+	<logger name="com.rong.example.mapper" level="debug" />
 	<logger name="org.apache.http" level="WARN"/>
 	<logger name="org.mybatis" level="info"/>
 	<logger name="org.springframework.jdbc" level="info"/>
