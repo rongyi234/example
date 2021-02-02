@@ -7,7 +7,7 @@ import cn.hutool.core.util.StrUtil;
 import com.rong.example.advice.PageLimitHolderFilter;
 import com.rong.example.bean.bo.UserMessage;
 import com.rong.example.cache.RedisKeyConstant;
-import com.rong.example.cache.RedisUtils;
+import com.rong.example.cache.RedisClient;
 import com.rong.example.constant.UITypeEnum;
 import com.rong.example.mapper.UserMessagePoMapper;
 import com.rong.example.mapper.pojo.UserMessagePo;
@@ -33,7 +33,7 @@ public class UserMessageService {
 	private UserMessagePoMapper userMessagePoMapper;
 
 	@Autowired
-	private RedisUtils redisUtils;
+	private RedisClient redisClient;
 
 
 	public  List<UserMessage> selectMsgInfo(String userId) throws Exception{
@@ -42,7 +42,7 @@ public class UserMessageService {
 		if(StrUtil.isNotEmpty(userId)){
 			String key = RedisKeyConstant.CACHE_TYPE_USER+RedisKeyConstant.UNDERLINE+userId;
 
-			UserMessage userMessage=redisUtils.getObject(key,UserMessage.class);
+			UserMessage userMessage= redisClient.getObject(key,UserMessage.class);
 			if(userMessage != null){
 				log.info("查询redis: userMessage="+userMessage);
 				List<UserMessage> list= new ArrayList<>();
@@ -68,7 +68,7 @@ public class UserMessageService {
 			UserMessage userMessage=new UserMessage();
 			BeanUtil.copyProperties(polist.get(0),userMessage);
 			log.info("存储redis: userMessage="+userMessage);
-			redisUtils.setObject(key,userMessage,10, TimeUnit.SECONDS);
+			redisClient.setObject(key,userMessage,10, TimeUnit.SECONDS);
 		}
 
 		//封装转换

@@ -47,7 +47,7 @@
         account_id = #{po.accountId,jdbcType=VARCHAR}
       </if>
     </trim>
-    <if test="page.startIndex != null" >
+    <if test="page != null and page.startIndex != null" >
       order by create_time desc
       limit #{page.startIndex,jdbcType=INTEGER},#{page.pageSize,jdbcType=INTEGER}
     </if>

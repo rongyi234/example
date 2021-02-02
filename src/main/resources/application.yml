@@ -37,7 +37,10 @@ spring:
  
 logging:
   config: classpath:log-${spring.profiles.active}.xml
-    
+
+task:
+  ExampleTask: 0/30 * * * * ?
+
 feign:
   service:
     sale:

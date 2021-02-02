@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,9 +22,9 @@ import java.util.concurrent.TimeUnit;
  * @author rongyi
  */
 @Component
-public class RedisUtils {
+public class RedisClient {
 
-    private final static Logger log = LoggerFactory.getLogger(RedisUtils.class);
+    private final static Logger log = LoggerFactory.getLogger(RedisClient.class);
 
     @Autowired
     private  RedisTemplate<String,?> redis;
@@ -107,11 +106,11 @@ public class RedisUtils {
     /***
      * 并发控制，获取锁： 如果存在返回false，否则返回true
      */
-    public  boolean getLock(String lockId, long expire) {
+    public  boolean getLock(String lockId, long expire, TimeUnit unit) {
         String key = addPrefix(lockId);
         boolean result = stringRedis.boundValueOps(key).setIfAbsent("1");
         if (result) {
-            stringRedis.expire(key, expire, TimeUnit.SECONDS);
+            stringRedis.expire(key, expire, unit);
         }
         return result;
     }
@@ -174,10 +173,10 @@ public class RedisUtils {
     /***
      * 以map集合的形式添加键值对
      */
-    public  void hashPutMap(String key, Map<String, Object> map,Long expire) {
+    public  void hashPutMap(String key, Map<String, Object> map,Long expire,TimeUnit unit) {
         getHashOperations().putAll(addPrefix(key), map);
         if (expire != null) {
-            redis.expire(addPrefix(key), (long)expire, TimeUnit.SECONDS);
+            redis.expire(addPrefix(key), (long)expire, unit);
         }
     }
 
