@@ -3,8 +3,10 @@ package com.rong.example.api;
 
 import com.rong.example.advice.SessionContextHolder;
 import com.rong.example.bean.bo.SessionContext;
+import com.rong.example.kafka.producer.Producer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,20 +21,35 @@ public class TestController {
 	@Resource(name = "commonThreadPool")
 	private ExecutorService commonThreadPool;
 
+	@Autowired
+	private Producer producer;
+
 
 	/**
-	 *   测试初始化kafka
+	 *   测试kafka
 	 */
-	@RequestMapping("/testJobInitKafkaListener")
-	public String testJobInitKafkaListener(@RequestParam Integer cltId){
-
+	@RequestMapping("/kafka")
+	public String testJobInitKafkaListener(){
 		String result="success";
 		try {
-
+			producer.send();
 		} catch (Exception e) {
 			result="Exception = "+e.toString();
 		}
+		return result;
+	}
 
+	/**
+	 *   测试kafka
+	 */
+	@RequestMapping("/kafkaHead")
+	public String testKafkaHead(){
+		String result="success";
+		try {
+			producer.sendWithHead();
+		} catch (Exception e) {
+			result="Exception = "+e.toString();
+		}
 		return result;
 	}
 
