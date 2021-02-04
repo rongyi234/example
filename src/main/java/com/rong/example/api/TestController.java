@@ -4,6 +4,7 @@ package com.rong.example.api;
 import com.rong.example.advice.SessionContextHolder;
 import com.rong.example.bean.bo.SessionContext;
 import com.rong.example.kafka.producer.Producer;
+import com.rong.example.propLoad.database.DictionaryCacheService;
 import com.rong.example.propLoad.properties.LoadProperties;
 import com.rong.example.propLoad.yml.Person;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.RejectedExecutionException;
 
@@ -110,6 +112,18 @@ public class TestController {
 	public String loadProperties(){
 
 		return LoadProperties.paramMap.toString();
+	}
+
+	/**
+	 *   测试jdbc预加载数据库
+	 */
+	@RequestMapping("/loadDB")
+	public String loadDB(){
+
+		for(Map.Entry<String,String> item: DictionaryCacheService.dictionaryInfoMap.entrySet()){
+			System.out.println("加载配置：key="+item.getKey()+", value="+item.getValue());
+		}
+		return "success";
 	}
 
 }
