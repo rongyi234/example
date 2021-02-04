@@ -16,9 +16,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class DictionaryCacheService {
 
-    /**
-     * 配置
-     */
     public static Map<String, String> dictionaryInfoMap;
 
     /**

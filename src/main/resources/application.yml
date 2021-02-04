@@ -33,6 +33,10 @@ spring:
     port: 6379
     database: 9
     timeout: 5000
+  cache:
+    redis:
+      time-to-live: 30s
+      cacheNullValues: false
   kafka:
     bootstrap-servers: 47.111.128.244:9092
     producer:

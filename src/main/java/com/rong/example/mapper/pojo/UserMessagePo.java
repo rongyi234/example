@@ -1,8 +1,9 @@
 package com.rong.example.mapper.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserMessagePo {
+public class UserMessagePo implements Serializable {
     private String id;
 
     private String info;
