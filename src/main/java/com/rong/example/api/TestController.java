@@ -4,7 +4,8 @@ package com.rong.example.api;
 import com.rong.example.advice.SessionContextHolder;
 import com.rong.example.bean.bo.SessionContext;
 import com.rong.example.kafka.producer.Producer;
-import com.rong.example.prefixLoad.yml.Person;
+import com.rong.example.propLoad.properties.LoadProperties;
+import com.rong.example.propLoad.yml.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class TestController {
 
 	@Autowired
 	private Person person;
+
 
 
 	/**
@@ -101,5 +103,13 @@ public class TestController {
 		return person.toString();
 	}
 
+	/**
+	 *   测试loadProperties
+	 */
+	@RequestMapping("/loadProperties")
+	public String loadProperties(){
+
+		return LoadProperties.paramMap.toString();
+	}
 
 }

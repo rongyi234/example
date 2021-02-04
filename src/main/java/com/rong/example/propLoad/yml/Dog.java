@@ -1,4 +1,4 @@
-package com.rong.example.prefixLoad.yml;
+package com.rong.example.propLoad.yml;
 
 import lombok.Data;
 
