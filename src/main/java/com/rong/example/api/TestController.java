@@ -4,6 +4,7 @@ package com.rong.example.api;
 import com.rong.example.advice.SessionContextHolder;
 import com.rong.example.bean.bo.SessionContext;
 import com.rong.example.kafka.producer.Producer;
+import com.rong.example.prefixLoad.yml.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class TestController {
 
 	@Autowired
 	private Producer producer;
+
+	@Autowired
+	private Person person;
 
 
 	/**
@@ -85,6 +89,16 @@ public class TestController {
 			log.error("线程池溢出，创建线程失败");
 
 		}
+	}
+
+
+	/**
+	 *   测试yml配置
+	 */
+	@RequestMapping("/yml")
+	public String testYml(){
+
+		return person.toString();
 	}
 
 

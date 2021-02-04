@@ -1,0 +1,16 @@
+person:
+  lastName: hello
+  age: 18
+  boss: false
+  birth: 2017/12/12
+  maps:
+    key1: value1
+    key2: value2
+  lists:
+    - lisi
+    - zhaoliu
+  dog:
+    name: 小狗
+    age: 12
+
+
