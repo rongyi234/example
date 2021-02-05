@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.Arrays;
 
@@ -16,7 +13,7 @@ import java.util.Arrays;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
-    private UserInfoInterceptor userInfoInterceptor;
+    private MethodCheckInterceptor methodCheckInterceptor;
 
     /**
      * 添加拦截器
@@ -24,7 +21,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-        registry.addInterceptor(userInfoInterceptor)
+        registry.addInterceptor(methodCheckInterceptor)
                 //配置拦截路径，其中/**表示当前目录以及所有子目录（递归），/*表示当前目录，不包括子目录。
                 //配置"/userMsg"，就只能拦截 ..../userMsg 这种
                 .addPathPatterns("/userMsg/**","/sale/**","/test/**")

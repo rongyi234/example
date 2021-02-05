@@ -50,10 +50,10 @@ public class GlobalExceptionHandler{
 	 */
 	@ExceptionHandler(value = { ServiceException.class })
 	@ResponseBody
-	public String handleBusinessException(ServiceException e) {
+	public void handleBusinessException(ServiceException e) {
 		log.error("业务异常 ："+ ErrorCodeEnum.getMsgByCode(e.getCode()));
 		response.addHeader(ExampleConstants.HTTP_FLAG_CODE,String.valueOf(e.getCode()));
-		return e.getMessage();
+//		return ErrorCodeEnum.getMsgByCode(e.getCode());
 	}
 
 
