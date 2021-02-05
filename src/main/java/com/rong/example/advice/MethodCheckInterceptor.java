@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 用户信息拦截器
+ * 方法准入校验 拦截器
  */
 @Component
 @Slf4j

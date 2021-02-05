@@ -6,11 +6,13 @@ import cn.hutool.core.util.StrUtil;
  * 错误码枚举值
  */
 public enum ErrorCodeEnum {
-    SYSTEM_ERROR(525000, "系统内部异常"),
+    SYSTEM_ERROR(5000, "系统内部异常"),
 
-    REQUEST_PARAMS_ERROR(525001,"必传参数校验异常"),
+    REQUEST_PARAMS_ERROR(5001,"必传参数校验异常"),
 
-    APP_VERSION_ERROR(525002,"app版本过低");
+    APP_VERSION_ERROR(5002,"app版本过低"),
+
+    RATELIMIT_ERROR(5003,"频控校验失败，超过系统允许阈值");
 
     /**
      * 根据code获取msg

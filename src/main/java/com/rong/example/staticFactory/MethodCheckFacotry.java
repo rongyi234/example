@@ -41,7 +41,7 @@ public class MethodCheckFacotry implements ApplicationContextAware, Initializing
     /**
      * 判断方法对应的校验实现类，然后执行
      */
-    public static void  methodCheck(HttpServletRequest request, HttpServletResponse response){
+    public static void  methodCheck(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
         checkImpls.stream().forEach( e -> {if(e.accept(request, response)) e.execute(request, response);});
     }
