@@ -20,9 +20,6 @@ public class MethodCheckInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)	throws Exception {
 
-        //新建上下文
-        SessionContextHolder.setContext(new SessionContext());
-
         //各方法执行自己的校验逻辑
         MethodCheckFacotry.methodCheck(request,response);
 

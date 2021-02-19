@@ -20,9 +20,13 @@ public class SessionContextHolder {
 
     public static SessionContext getContext() {
         SessionContext context = (SessionContext) threadLocal.get();
+        if(context == null){
+            context = new SessionContext();
+            threadLocal.set(context);
+        }
 
         //默认设置线程名称
-        if(context != null && StrUtil.isEmpty(context.getSysThreadName())){
+        if(StrUtil.isEmpty(context.getSysThreadName())){
             context.setSysThreadName(Thread.currentThread().getName());
         }
         return  context;
