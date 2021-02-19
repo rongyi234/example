@@ -29,7 +29,7 @@ public class CommonThreadPoolConfiguration {
     /**
      * 线程池名称格式
      */
-    private static final String THREAD_POOL_NAME = "commonThread-%d";
+    private static final String THREAD_POOL_NAME = "customThread-%d";
 
     /**
      * 线程工厂名称

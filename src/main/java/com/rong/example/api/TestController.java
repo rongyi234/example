@@ -83,10 +83,17 @@ public class TestController {
 		try {
 			commonThreadPool.execute(()->{
 				try {
+					//放在首行（先设置线程名称）
 					SessionContextHolder.setContext(context);
-					log.info("看，我重启了一个线程，并设置了上下文: "+SessionContextHolder.getContext());
+					log.info(">> 开启异步线程：");
+
+
+					log.info("看，我设置了上下文: "+SessionContextHolder.getContext());
+
 				} catch (Exception e) {
 					log.error("异步线程异常了："+e.toString());
+				}finally {
+					log.info("<< 异步线程结束");
 				}
 			});
 		} catch (RejectedExecutionException e) {

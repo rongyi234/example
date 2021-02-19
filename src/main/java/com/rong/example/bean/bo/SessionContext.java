@@ -12,4 +12,11 @@ public class SessionContext {
      * 客户端版本
      */
     String appVersion;
+
+    /**
+     * 线程名称
+     */
+    String sysThreadName;
+
+
 }
