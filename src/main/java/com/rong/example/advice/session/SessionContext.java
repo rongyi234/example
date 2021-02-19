@@ -1,4 +1,4 @@
-package com.rong.example.bean.bo;
+package com.rong.example.advice.session;
 
 import lombok.Data;
 

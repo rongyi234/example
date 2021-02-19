@@ -1,7 +1,7 @@
-package com.rong.example.advice;
+package com.rong.example.advice.session;
 
 import cn.hutool.core.util.StrUtil;
-import com.rong.example.bean.bo.SessionContext;
+import com.rong.example.advice.session.SessionContext;
 import lombok.extern.slf4j.Slf4j;
 
 /**

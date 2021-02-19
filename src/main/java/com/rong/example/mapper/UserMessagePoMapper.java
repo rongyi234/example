@@ -1,6 +1,6 @@
 package com.rong.example.mapper;
 
-import com.rong.example.bean.bo.PageLimit;
+import com.rong.example.advice.filter.PageLimit;
 import com.rong.example.mapper.pojo.UserMessagePo;
 import org.apache.ibatis.annotations.Param;
 

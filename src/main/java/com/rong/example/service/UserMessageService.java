@@ -4,7 +4,7 @@ package com.rong.example.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import com.rong.example.advice.PageLimitHolderFilter;
+import com.rong.example.advice.filter.PageLimitHolderFilter;
 import com.rong.example.bean.bo.UserMessage;
 import com.rong.example.cache.RedisKeyConstant;
 import com.rong.example.cache.RedisClient;

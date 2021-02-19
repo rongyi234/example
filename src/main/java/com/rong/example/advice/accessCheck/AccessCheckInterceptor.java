@@ -1,8 +1,5 @@
-package com.rong.example.advice;
+package com.rong.example.advice.accessCheck;
 
-import com.rong.example.bean.bo.SessionContext;
-import com.rong.example.staticFactory.MethodCheckFacotry;
-import com.rong.example.staticFactory.MethodCheckService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -15,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 @Slf4j
-public class MethodCheckInterceptor extends HandlerInterceptorAdapter {
+public class AccessCheckInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)	throws Exception {
 
         //各方法执行自己的校验逻辑
-        MethodCheckFacotry.methodCheck(request,response);
+        AccessCheckFacotry.methodCheck(request,response);
 
         return true;
     }

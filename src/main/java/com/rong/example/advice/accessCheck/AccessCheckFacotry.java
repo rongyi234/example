@@ -1,4 +1,4 @@
-package com.rong.example.staticFactory;
+package com.rong.example.advice.accessCheck;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
@@ -16,17 +16,17 @@ import java.util.Map;
  * 方法校验服务工厂类
  */
 @Component
-public class MethodCheckFacotry implements ApplicationContextAware, InitializingBean {
+public class AccessCheckFacotry implements ApplicationContextAware, InitializingBean {
 
     private ApplicationContext applicationContext;
 
-    private static List<MethodCheckService> checkImpls=new ArrayList<>();
+    private static List<AccessCheckService> checkImpls=new ArrayList<>();
 
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Map<String,MethodCheckService> map = this.applicationContext.getBeansOfType(MethodCheckService.class);
-        for(Map.Entry<String,MethodCheckService> entry: map.entrySet()){
+        Map<String, AccessCheckService> map = this.applicationContext.getBeansOfType(AccessCheckService.class);
+        for(Map.Entry<String, AccessCheckService> entry: map.entrySet()){
             checkImpls.add(entry.getValue());
         }
 

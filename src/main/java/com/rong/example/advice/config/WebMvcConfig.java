@@ -1,5 +1,7 @@
-package com.rong.example.advice;
+package com.rong.example.advice.config;
 
+import com.rong.example.advice.accessCheck.AccessCheckInterceptor;
+import com.rong.example.advice.filter.PageLimitHolderFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +15,7 @@ import java.util.Arrays;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
-    private MethodCheckInterceptor methodCheckInterceptor;
+    private AccessCheckInterceptor accessCheckInterceptor;
 
     /**
      * 添加拦截器
@@ -21,7 +23,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-        registry.addInterceptor(methodCheckInterceptor)
+        registry.addInterceptor(accessCheckInterceptor)
                 //配置拦截路径，其中/**表示当前目录以及所有子目录（递归），/*表示当前目录，不包括子目录。
                 //配置"/userMsg"，就只能拦截 ..../userMsg 这种
                 .addPathPatterns("/*","/userMsg/**","/sale/**","/test/**")

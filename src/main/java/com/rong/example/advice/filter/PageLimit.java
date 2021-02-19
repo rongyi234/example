@@ -1,4 +1,4 @@
-package com.rong.example.bean.bo;
+package com.rong.example.advice.filter;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;

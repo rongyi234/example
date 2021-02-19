@@ -1,7 +1,6 @@
-package com.rong.example.advice;
+package com.rong.example.advice.log;
 
 import com.alibaba.fastjson.JSON;
-import com.rong.example.bean.bo.PageLimit;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;

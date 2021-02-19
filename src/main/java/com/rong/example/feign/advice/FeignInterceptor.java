@@ -1,8 +1,8 @@
 package com.rong.example.feign.advice;
 
 import cn.hutool.core.util.StrUtil;
-import com.rong.example.advice.SessionContextHolder;
-import com.rong.example.bean.bo.SessionContext;
+import com.rong.example.advice.session.SessionContextHolder;
+import com.rong.example.advice.session.SessionContext;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;

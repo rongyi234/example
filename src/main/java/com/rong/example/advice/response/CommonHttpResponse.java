@@ -1,7 +1,8 @@
-package com.rong.example.bean.bo;
+package com.rong.example.advice.response;
 
 import cn.hutool.core.util.StrUtil;
-import com.rong.example.advice.PageLimitHolderFilter;
+import com.rong.example.advice.filter.PageLimit;
+import com.rong.example.advice.filter.PageLimitHolderFilter;
 import com.rong.example.constant.ErrorCodeEnum;
 import com.rong.example.constant.ExampleConstants;
 import lombok.ToString;

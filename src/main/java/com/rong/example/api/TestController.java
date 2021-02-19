@@ -1,8 +1,8 @@
 package com.rong.example.api;
 
 
-import com.rong.example.advice.SessionContextHolder;
-import com.rong.example.bean.bo.SessionContext;
+import com.rong.example.advice.session.SessionContextHolder;
+import com.rong.example.advice.session.SessionContext;
 import com.rong.example.kafka.producer.Producer;
 import com.rong.example.propLoad.database.DictionaryCacheService;
 import com.rong.example.propLoad.properties.LoadProperties;

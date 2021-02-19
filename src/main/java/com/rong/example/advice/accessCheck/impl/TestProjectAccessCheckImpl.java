@@ -1,17 +1,15 @@
-package com.rong.example.staticFactory.impl;
+package com.rong.example.advice.accessCheck.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSON;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.rong.example.advice.SessionContextHolder;
-import com.rong.example.bean.bo.SessionContext;
+import com.rong.example.advice.session.SessionContextHolder;
 import com.rong.example.constant.ErrorCodeEnum;
 import com.rong.example.constant.ExampleConstants;
-import com.rong.example.expection.ServiceException;
+import com.rong.example.advice.expection.ServiceException;
 import com.rong.example.propLoad.properties.LoadProperties;
-import com.rong.example.staticFactory.MethodCheckService;
+import com.rong.example.advice.accessCheck.AccessCheckService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Component
 @Slf4j
-public class TestProjectMethodCheckImpl implements MethodCheckService {
+public class TestProjectAccessCheckImpl implements AccessCheckService {
 
     /**
      * 方法 uri
