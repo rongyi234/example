@@ -101,10 +101,7 @@ public class TestProjectMethodCheckImpl implements MethodCheckService {
             throw new ServiceException(ErrorCodeEnum.APP_VERSION_ERROR.getCode());
         }
 
-        SessionContext context = new SessionContext();
-        context.setAppVersion(appVersion);
-        SessionContextHolder.setContext(context);
-        log.info("设置上下文："+ JSON.toJSONString(context));
+        SessionContextHolder.getContext().setAppVersion(appVersion);
     }
 
 

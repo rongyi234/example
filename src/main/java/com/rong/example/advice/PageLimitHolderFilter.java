@@ -1,6 +1,7 @@
 package com.rong.example.advice;
 
 import com.rong.example.bean.bo.PageLimit;
+import com.rong.example.bean.bo.SessionContext;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,8 @@ public class PageLimitHolderFilter implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
+        //分页参数上下文
         threadLocal.set(new PageLimit((HttpServletRequest) request));
         chain.doFilter(request, response);
 
