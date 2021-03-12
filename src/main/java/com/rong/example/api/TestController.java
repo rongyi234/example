@@ -3,6 +3,8 @@ package com.rong.example.api;
 
 import com.rong.example.advice.session.SessionContextHolder;
 import com.rong.example.advice.session.SessionContext;
+import com.rong.example.bean.bo.UserMessage;
+import com.rong.example.enumService.MessageEnum;
 import com.rong.example.kafka.producer.Producer;
 import com.rong.example.propLoad.database.DictionaryCacheService;
 import com.rong.example.propLoad.properties.LoadProperties;
@@ -11,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.plugin2.message.Message;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -32,6 +35,14 @@ public class TestController {
 	private Person person;
 
 
+	/**
+	 *   测试enum
+	 */
+	@RequestMapping("/enum")
+	public UserMessage testEnum(@RequestParam String type,@RequestParam String userId) throws Exception{
+
+		return MessageEnum.getEnumOf(Integer.valueOf(type)).packageMsg(userId);
+	}
 
 	/**
 	 *   测试kafka

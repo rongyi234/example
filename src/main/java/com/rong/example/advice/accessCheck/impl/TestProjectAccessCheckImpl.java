@@ -36,8 +36,7 @@ public class TestProjectAccessCheckImpl implements AccessCheckService {
      */
     private LoadingCache<String, AtomicInteger> counter= CacheBuilder.newBuilder()
                         .expireAfterWrite(2, TimeUnit.SECONDS)
-                        .build(
-                                new CacheLoader<String, AtomicInteger>() {
+                        .build(new CacheLoader<String, AtomicInteger>() {
                                     @Override
                                     public AtomicInteger load(String key) throws Exception {
                                         return new AtomicInteger(0);
